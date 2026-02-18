@@ -1,0 +1,11 @@
+# robots.txt for twopro.com
+
+# Allow all web crawlers to access the site
+User-agent: *
+Allow: /
+
+# Disallow admin areas
+Disallow: /admin
+
+# Sitemap location
+Sitemap: https://twopro.com/sitemap.xml
