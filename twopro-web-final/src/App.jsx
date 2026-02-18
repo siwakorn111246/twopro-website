@@ -129,13 +129,13 @@ export default function App() {
         const loadAllData = async () => {
             try {
                 const [siteConfigData, aboutConfigData, projectsData, servicesData, partnersData, footerServicesData, locationsData] = await Promise.all([
-                    fetchSiteConfig(),
-                    fetchAboutConfig(),
-                    fetchProjects(),
-                    fetchServices(),
-                    fetchPartners(),
-                    fetchFooterServices(),
-                    fetchLocations()
+                    fetchSiteConfig(true),
+                    fetchAboutConfig(true),
+                    fetchProjects(true),
+                    fetchServices(true),
+                    fetchPartners(true),
+                    fetchFooterServices(true),
+                    fetchLocations(true)
                 ]);
 
                 // Update site config if exists

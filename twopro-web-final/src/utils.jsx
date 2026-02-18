@@ -89,10 +89,13 @@ const API_BASE_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}
 const BACKEND_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 // Projects API
-export const fetchProjects = async () => {
-    const res = await fetch(`${API_BASE_URL}/projects`, {
-        headers: getAuthHeaders()
-    });
+export const fetchProjects = async (isPublic = false) => {
+    const url = isPublic
+        ? `${BACKEND_URL}/api/public/projects`
+        : `${API_BASE_URL}/projects`;
+    const headers = isPublic ? {} : getAuthHeaders();
+
+    const res = await fetch(url, { headers });
     if (!res.ok) throw new Error('Failed to fetch projects');
     const data = await res.json();
 
@@ -157,10 +160,13 @@ export const deleteProject = async (id) => {
 };
 
 // Services API
-export const fetchServices = async () => {
-    const res = await fetch(`${API_BASE_URL}/services`, {
-        headers: getAuthHeaders()
-    });
+export const fetchServices = async (isPublic = false) => {
+    const url = isPublic
+        ? `${BACKEND_URL}/api/public/services`
+        : `${API_BASE_URL}/services`;
+    const headers = isPublic ? {} : getAuthHeaders();
+
+    const res = await fetch(url, { headers });
     if (!res.ok) throw new Error('Failed to fetch services');
     const data = await res.json();
 
@@ -221,10 +227,13 @@ export const deleteService = async (id) => {
 };
 
 // Site Config API
-export const fetchSiteConfig = async () => {
-    const res = await fetch(`${API_BASE_URL}/site-config`, {
-        headers: getAuthHeaders()
-    });
+export const fetchSiteConfig = async (isPublic = false) => {
+    const url = isPublic
+        ? `${BACKEND_URL}/api/public/site-config`
+        : `${API_BASE_URL}/site-config`;
+    const headers = isPublic ? {} : getAuthHeaders();
+
+    const res = await fetch(url, { headers });
     if (!res.ok) throw new Error('Failed to fetch site config');
     const data = await res.json();
 
@@ -288,10 +297,13 @@ export const deleteMessage = async (id) => {
 };
 
 // About Config API
-export const fetchAboutConfig = async () => {
-    const res = await fetch(`${API_BASE_URL}/about-config`, {
-        headers: getAuthHeaders()
-    });
+export const fetchAboutConfig = async (isPublic = false) => {
+    const url = isPublic
+        ? `${BACKEND_URL}/api/public/about-config`
+        : `${API_BASE_URL}/about-config`;
+    const headers = isPublic ? {} : getAuthHeaders();
+
+    const res = await fetch(url, { headers });
     if (!res.ok) throw new Error('Failed to fetch about config');
     return res.json();
 };
@@ -307,10 +319,13 @@ export const updateAboutConfig = async (configData) => {
 };
 
 // Partners API
-export const fetchPartners = async () => {
-    const res = await fetch(`${API_BASE_URL}/partners`, {
-        headers: getAuthHeaders()
-    });
+export const fetchPartners = async (isPublic = false) => {
+    const url = isPublic
+        ? `${BACKEND_URL}/api/public/partners`
+        : `${API_BASE_URL}/partners`;
+    const headers = isPublic ? {} : getAuthHeaders();
+
+    const res = await fetch(url, { headers });
     if (!res.ok) throw new Error('Failed to fetch partners');
     const data = await res.json();
 
@@ -382,10 +397,13 @@ export const deletePartner = async (id) => {
 };
 
 // Footer Services API
-export const fetchFooterServices = async () => {
-    const res = await fetch(`${API_BASE_URL}/footer-services`, {
-        headers: getAuthHeaders()
-    });
+export const fetchFooterServices = async (isPublic = false) => {
+    const url = isPublic
+        ? `${BACKEND_URL}/api/public/footer-services`
+        : `${API_BASE_URL}/footer-services`;
+    const headers = isPublic ? {} : getAuthHeaders();
+
+    const res = await fetch(url, { headers });
     if (!res.ok) throw new Error('Failed to fetch footer services');
     return res.json();
 };
@@ -420,10 +438,13 @@ export const deleteFooterService = async (id) => {
 };
 
 // Locations API
-export const fetchLocations = async () => {
-    const res = await fetch(`${API_BASE_URL}/locations`, {
-        headers: getAuthHeaders()
-    });
+export const fetchLocations = async (isPublic = false) => {
+    const url = isPublic
+        ? `${BACKEND_URL}/api/public/locations`
+        : `${API_BASE_URL}/locations`;
+    const headers = isPublic ? {} : getAuthHeaders();
+
+    const res = await fetch(url, { headers });
     if (!res.ok) throw new Error('Failed to fetch locations');
     return res.json();
 };
