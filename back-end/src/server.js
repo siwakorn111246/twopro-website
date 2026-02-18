@@ -12,6 +12,7 @@ const __dirname = path.dirname(__filename);
 
 // Routes
 import authRoutes from './routes/authRoutes.js';
+import publicRoutes from './routes/publicRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';
 import messageRoutes from './routes/messageRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
@@ -65,6 +66,9 @@ connectDB();
 
 // Auth Routes (no auth middleware required)
 app.use('/api/auth', authRoutes);
+
+// Public Routes (no authentication required)
+app.use('/api/public', publicRoutes);
 
 // Protected Routes (require authentication)
 app.use('/api/projects', auth, projectRoutes);
