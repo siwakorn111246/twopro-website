@@ -15,8 +15,8 @@ router.post('/login', (req, res) => {
     const { username, password } = req.body;
 
     // Admin credentials (ในอนาคตควรเก็บใน database)
-    const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
-    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+    const ADMIN_USERNAME = 'admin';
+    const ADMIN_PASSWORD = 'admin123';
 
     // Check if credentials match
     if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
