@@ -24,10 +24,10 @@ import {
 // =========================================
 
 const DEFAULT_SITE_CONFIG = {
-    heroTitle: "Limitless\nInnovation",
+    heroTitle: "TWOPRO\nSUPPLY AND",
     heroSubtitle: "INNOVATING FOR THE FUTURE",
     heroDescription: "ทูโปร ซัพพลาย แอนด์ เอ็นจิเนียริ่ง — ยกระดับธุรกิจด้วยโซลูชันวิศวกรรมระบบและซอฟต์แวร์อัจฉริยะ ที่ออกแบบมาเพื่อการเติบโตที่ยั่งยืน",
-    heroImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2070&q=80",
+    heroImage: "/uploads/image-1770948367565-967822552.jpg",
     phone: "02-123-4567",
     email: "contact@twopro.com",
     address: "99/888 อาคารทูโปรทาวเวอร์ ชั้น 15 ถนนรัชดาภิเษก แขวงดินแดง เขตดินแดง กรุงเทพมหานาสคร 10400",
@@ -35,16 +35,16 @@ const DEFAULT_SITE_CONFIG = {
 };
 
 const DEFAULT_ABOUT_CONFIG = {
-    establishedYear: "2558",
-    projectCount: "500+",
-    phone: "02-123-4567",
+    establishedYear: "2567",
+    projectCount: "3",
+    phone: "06-312-7565",
     lineId: "@twopro",
-    description1: "บริษัท ทูโปร ซัพพลาย แอนด์ เอ็นจิเนียริ่ง จำกัด ก่อตั้งขึ้นในปี 2558 ด้วยวิสัยทัศน์ที่ต้องการยกระดับมาตรฐานอุตสาหกรรมไทย เราเริ่มต้นจากความเชี่ยวชาญด้านวิศวกรรมระบบไฟฟ้าและโครงข่ายสื่อสาร",
-    description2: "ด้วยประสบการณ์กว่าทศวรรษ เรามุ่งมั่นส่งมอบโซลูชันที่แม่นยำ ทันสมัย และยั่งยืน เพื่อขับเคลื่อนธุรกิจของคู่ค้าให้ก้าวไปข้างหน้าอย่างมั่นคง"
+    description1: "ก่อตั้งเมื่อ 13 ก.พ. 2567 เพื่อสนับสนุนองค์กรให้ก้าวสู่โลกดิจิทัล เติบโตจากผู้จัดหาอุปกรณ์ Infra สู่ผู้เชี่ยวชาญด้าน System Integration พร้อมช่วยให้ธุรกิจใช้เทคโนโลยีได้อย่างมั่นใจ ปลอดภัย และเหมาะสมกับบริบทขององค์กรในภูมิภาค",
+    description2: "เราเลือกใช้อุปกรณ์ที่ผ่านมาตรฐานระดับสากลและรองรับการใช้งานระยะยาว 24/7 Expert-Led System Architecture: ทีมวิศวกรระดับมืออาชีพ เชี่ยวชาญ Data Center และ Telecommunication พร้อมดูแลงานแบบครบวงจร"
 };
 
 const INITIAL_LOCATIONS = [
-    { id: 1, title: "สำนักงานใหญ่ (Headquarters)", address: "99/888 อาคารทูโปรทาวเวอร์ ชั้น 15 ถนนรัชดาภิเษก แขวงดินแดง เขตดินแดง กรุงเทพมหานาสคร 10400", icon: "MapPin" }
+    { id: 1, title: "บริษัท ทูโปร ซัพพลาย แอนด์ เอ็นจิเนียริ่ง จำกัด", address: "ที่อยู่ 132 ถนนดอนสนาม ตำบลเวียง อำเภอเมืองพะเยา จ.พะเยา 56000", icon: "MapPin" }
 ];
 
 const SAMPLE_PARTNERS = [
@@ -65,15 +65,10 @@ const SAMPLE_SERVICES = [
 ];
 
 const INITIAL_FOOTER_SERVICES = [
-    { id: 1, name: "ระบบสแกนใบหน้า" },
-    { id: 2, name: "จัดการการเข้าเรียน" },
-    { id: 3, name: "ดูข้อมูลผ่าน Line" },
-    { id: 4, name: "ระบบประเมินพฤติกรรม" },
-    { id: 5, name: "ฐานข้อมูลนักเรียน" },
-    { id: 6, name: "เครื่องมือช่วยสอนครู" },
-    { id: 7, name: "ระบบการเงินโรงเรียน" },
-    { id: 8, name: "ระบบแนะแนว" },
-    { id: 9, name: "ระบบแจ้งเตือน" }
+    { id: 1, name: "Smart city system" },
+    { id: 2, name: "ระบบจักการโรงอาหาร" },
+    { id: 3, name: "ระบบหอกระจ่ายข่าย (4G)" },
+    { id: 4, name: "โคมไฟถนนพลังงานเเสงอาทิตย์" },
 ];
 
 const SAMPLE_PROJECTS = [];
@@ -326,8 +321,27 @@ export default function App() {
     };
     const handleDeletePartner = async (id) => {
         try {
+            // Check if id is valid
+            if (!id || id === 'undefined' || id === undefined || id === 'null' || id === null) {
+                alert('ไม่สามารถลบคู่ค้าได้: ID ไม่ถูกต้อง');
+                return;
+            }
+
+            // Check if id is a number (from SAMPLE_PARTNERS) instead of MongoDB ObjectId
+            if (typeof id === 'number') {
+                alert('ไม่สามารถลบคู่ค้านี้ได้ (ข้อมูลจำลอง)');
+                return;
+            }
+
+            // Check if partner exists in current state (check both _id and id)
+            const partnerToDelete = partners.find(p => p._id === id || p.id === id);
+            if (!partnerToDelete) {
+                alert('ไม่พบคู่ค้าที่ต้องการลบ');
+                return;
+            }
+
             await apiDeletePartner(id);
-            setPartners(prev => prev.filter(p => p.id !== id));
+            setPartners(prev => prev.filter(p => p._id !== id && p.id !== id));
         } catch (error) {
             alert('ไม่สามารถลบคู่ค้าได้');
         }

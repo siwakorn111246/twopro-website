@@ -93,7 +93,11 @@ export function PartnerModal({ partner, onClose, onSave }) {
         }
     };
 
-    const handleSubmit = (e) => { e.preventDefault(); onSave({ id: partner?.id, name, logo, website }, imageFile); };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const partnerId = partner?._id || partner?.id;
+        onSave({ id: partnerId, name, logo, website }, imageFile);
+    };
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm animate-fade-in-up">
             <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white">
@@ -313,7 +317,7 @@ export function AdminLogin({ onLogin, onBack, adminUser }) {
                         </div>
                         <div className="space-y-1.5">
                             <label className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1">Password</label>
-                            <div className="relative group"><div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"><Icon name="Lock" size={18} /></div><input type="password" value={pass} onChange={e => setPass(e.target.value)} placeholder="••••••••••" className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl py-3 pl-12 pr-4 font-bold text-sm focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all" /></div>
+                            <div className="relative group"><div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"><Icon name="Lock" size={18} /></div><input type="password" value={pass} onChange={e => setPass(e.target.value)} placeholder="•••••••••••" className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl py-3 pl-12 pr-4 font-bold text-sm focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all" /></div>
                         </div>
                         <Button variant="gradient" type="submit" className="w-full !py-3 !text-sm shadow-lg">Secure Login</Button>
                     </form>
@@ -498,7 +502,12 @@ export function AdminDashboard({ onLogout, projects, services, footerServices, s
                 {activeTab === 'partners' && (
                     <div className="animate-fade-in-up">
                         <div className="flex justify-between items-end mb-6"><div><h3 className="text-2xl font-bold">ความร่วมมือ Management</h3><p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Manage partner logos.</p></div><Button variant="primary" onClick={() => { setEditingPartner(null); setIsPartnerModalOpen(true); }}><Icon name="Plus" size={18} className="mr-2" /> New ความร่วมมือ</Button></div>
-                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">{partners.map(partner => (<div key={partner.id} className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 flex flex-col items-center text-slate-900 dark:text-white"><div className="h-20 w-full flex items-center justify-center mb-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl p-4"><img src={getImageUrl(partner.logo)} alt={partner.name} className="max-h-full max-w-full object-contain" /></div><h4 className="text-sm font-bold mb-4 text-center truncate w-full">{partner.name}</h4><div className="flex gap-2 w-full mt-auto"><button onClick={() => handleEditPartner(partner)} className="flex-1 py-2 rounded-xl border border-slate-200 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Edit</button><button onClick={() => { if (window.confirm('ต้องการลบความร่วมมือนี้?')) onDeletePartner(partner.id); }} className="p-2 rounded-xl border border-red-100 dark:border-red-900/30 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"><Icon name="Trash2" size={16} /></button></div></div>))}</div>
+                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">{partners.map(partner => {
+                            const partnerId = partner._id || partner.id;
+                            return (
+                                <div key={partnerId} className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 flex flex-col items-center text-slate-900 dark:text-white"><div className="h-20 w-full flex items-center justify-center mb-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl p-4"><img src={getImageUrl(partner.logo)} alt={partner.name} className="max-h-full max-w-full object-contain" /></div><h4 className="text-sm font-bold mb-4 text-center truncate w-full">{partner.name}</h4><div className="flex gap-2 w-full mt-auto"><button onClick={() => handleEditPartner(partner)} className="flex-1 py-2 rounded-xl border border-slate-200 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Edit</button><button onClick={() => { if (window.confirm('ต้องการลบความร่วมมือนี้?')) onDeletePartner(partnerId); }} className="p-2 rounded-xl border border-red-100 dark:border-red-900/30 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"><Icon name="Trash2" size={16} /></button></div></div>
+                            );
+                        })}</div>
                     </div>
                 )}
 
