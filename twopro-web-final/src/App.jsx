@@ -280,8 +280,11 @@ export default function App() {
                 return;
             }
 
-            const result = await apiUpdateFooterService(id, updatedService);
-            setFooterServices(prev => prev.map(s => (s._id === id || s.id === id) ? result : s));
+            await apiUpdateFooterService(id, updatedService);
+
+            // Reload all footer services from API to ensure data is updated
+            const footerServicesData = await fetchFooterServices();
+            setFooterServices(footerServicesData);
         } catch (error) {
             alert('ไม่สามารถแก้ไขรายการ Footer ได้');
         }
@@ -325,8 +328,12 @@ export default function App() {
     };
     const handleUpdatePartner = async (updatedPartner, imageFile) => {
         try {
-            const result = await apiUpdatePartner(updatedPartner.id, updatedPartner, imageFile);
-            setPartners(prev => prev.map(p => p.id === updatedPartner.id ? result : p));
+            const partnerId = updatedPartner._id || updatedPartner.id;
+            await apiUpdatePartner(partnerId, updatedPartner, imageFile);
+
+            // Reload all partners from API to ensure data is updated
+            const partnersData = await fetchPartners();
+            setPartners(partnersData);
         } catch (error) {
             alert('ไม่สามารถแก้ไขคู่ค้าได้');
         }
@@ -382,8 +389,11 @@ export default function App() {
                 return;
             }
 
-            const result = await apiUpdateLocation(id, updatedL);
-            setLocations(prev => prev.map(l => (l._id === id || l.id === id) ? result : l));
+            await apiUpdateLocation(id, updatedL);
+
+            // Reload all locations from API to ensure data is updated
+            const locationsData = await fetchLocations();
+            setLocations(locationsData);
         } catch (error) {
             alert('ไม่สามารถแก้ไขสถานที่ได้');
         }
