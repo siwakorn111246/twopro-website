@@ -267,16 +267,48 @@ export default function App() {
     };
     const handleUpdateFooterService = async (updatedService) => {
         try {
-            const result = await apiUpdateFooterService(updatedService.id, updatedService);
-            setFooterServices(prev => prev.map(s => s.id === updatedService.id ? result : s));
+            // Check if id is valid
+            const id = updatedService._id || updatedService.id;
+            if (!id || id === 'undefined' || id === undefined || id === 'null' || id === null) {
+                alert('ไม่สามารถแก้ไขรายการ Footer ได้: ID ไม่ถูกต้อง');
+                return;
+            }
+
+            // Check if id is a number (from INITIAL_FOOTER_SERVICES) instead of MongoDB ObjectId
+            if (typeof id === 'number') {
+                alert('ไม่สามารถแก้ไขรายการ Footer นี้ได้ (ข้อมูลจำลอง)');
+                return;
+            }
+
+            const result = await apiUpdateFooterService(id, updatedService);
+            setFooterServices(prev => prev.map(s => (s._id === id || s.id === id) ? result : s));
         } catch (error) {
             alert('ไม่สามารถแก้ไขรายการ Footer ได้');
         }
     };
     const handleDeleteFooterService = async (id) => {
         try {
+            // Check if id is valid
+            if (!id || id === 'undefined' || id === undefined || id === 'null' || id === null) {
+                alert('ไม่สามารถลบรายการ Footer ได้: ID ไม่ถูกต้อง');
+                return;
+            }
+
+            // Check if id is a number (from INITIAL_FOOTER_SERVICES) instead of MongoDB ObjectId
+            if (typeof id === 'number') {
+                alert('ไม่สามารถลบรายการ Footer นี้ได้ (ข้อมูลจำลอง)');
+                return;
+            }
+
+            // Check if footer service exists in current state (check both _id and id)
+            const footerServiceToDelete = footerServices.find(s => s._id === id || s.id === id);
+            if (!footerServiceToDelete) {
+                alert('ไม่พบรายการ Footer ที่ต้องการลบ');
+                return;
+            }
+
             await apiDeleteFooterService(id);
-            setFooterServices(prev => prev.filter(s => s.id !== id));
+            setFooterServices(prev => prev.filter(s => s._id !== id && s.id !== id));
         } catch (error) {
             alert('ไม่สามารถลบรายการ Footer ได้');
         }
@@ -337,16 +369,48 @@ export default function App() {
     };
     const handleUpdateLocation = async (updatedL) => {
         try {
-            const result = await apiUpdateLocation(updatedL.id, updatedL);
-            setLocations(prev => prev.map(l => l.id === updatedL.id ? result : l));
+            // Check if id is valid
+            const id = updatedL._id || updatedL.id;
+            if (!id || id === 'undefined' || id === undefined || id === 'null' || id === null) {
+                alert('ไม่สามารถแก้ไขสถานที่ได้: ID ไม่ถูกต้อง');
+                return;
+            }
+
+            // Check if id is a number (from INITIAL_LOCATIONS) instead of MongoDB ObjectId
+            if (typeof id === 'number') {
+                alert('ไม่สามารถแก้ไขสถานที่นี้ได้ (ข้อมูลจำลอง)');
+                return;
+            }
+
+            const result = await apiUpdateLocation(id, updatedL);
+            setLocations(prev => prev.map(l => (l._id === id || l.id === id) ? result : l));
         } catch (error) {
             alert('ไม่สามารถแก้ไขสถานที่ได้');
         }
     };
     const handleDeleteLocation = async (id) => {
         try {
+            // Check if id is valid
+            if (!id || id === 'undefined' || id === undefined || id === 'null' || id === null) {
+                alert('ไม่สามารถลบสถานที่ได้: ID ไม่ถูกต้อง');
+                return;
+            }
+
+            // Check if id is a number (from INITIAL_LOCATIONS) instead of MongoDB ObjectId
+            if (typeof id === 'number') {
+                alert('ไม่สามารถลบสถานที่นี้ได้ (ข้อมูลจำลอง)');
+                return;
+            }
+
+            // Check if location exists in current state (check both _id and id)
+            const locationToDelete = locations.find(l => l._id === id || l.id === id);
+            if (!locationToDelete) {
+                alert('ไม่พบสถานที่ที่ต้องการลบ');
+                return;
+            }
+
             await apiDeleteLocation(id);
-            setLocations(prev => prev.filter(l => l.id !== id));
+            setLocations(prev => prev.filter(l => l._id !== id && l.id !== id));
         } catch (error) {
             alert('ไม่สามารถลบสถานที่ได้');
         }
