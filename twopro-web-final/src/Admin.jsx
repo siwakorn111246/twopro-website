@@ -460,18 +460,21 @@ export function AdminDashboard({ onLogout, projects, services, footerServices, s
                                 <table className="w-full text-left text-slate-900 dark:text-white">
                                     <thead className="bg-slate-50 dark:bg-slate-900 text-slate-500 dark:text-slate-400 text-xs uppercase font-black"><tr><th className="px-6 py-4">หัวข้อสถานที่</th><th className="px-6 py-4">ที่อยู่</th><th className="px-6 py-4 text-right">จัดการ</th></tr></thead>
                                     <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
-                                        {locations.map(loc => (
-                                            <tr key={loc.id} className="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
-                                                <td className="px-6 py-4 font-bold text-sm flex items-center gap-3"><div className="p-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-500 rounded-lg"><Icon name={loc.icon} size={16} /></div>{loc.title}</td>
-                                                <td className="px-6 py-4 text-slate-500 dark:text-slate-400 text-sm max-w-[300px] truncate">{loc.address}</td>
-                                                <td className="px-6 py-4 text-right">
-                                                    <div className="flex justify-end gap-2">
-                                                        <button onClick={() => handleEditLocation(loc)} className="p-2 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 text-emerald-600 transition-colors"><Icon name="Edit" size={18} /></button>
-                                                        <button onClick={() => { if (window.confirm('ยืนยันลบสถานที่นี้?')) onDeleteLocation(loc.id); }} className="p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 transition-colors"><Icon name="Trash2" size={18} /></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        ))}
+                                        {locations.map(loc => {
+                                            const locId = loc.id || loc._id;
+                                            return (
+                                                <tr key={locId} className="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
+                                                    <td className="px-6 py-4 font-bold text-sm flex items-center gap-3"><div className="p-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-500 rounded-lg"><Icon name={loc.icon} size={16} /></div>{loc.title}</td>
+                                                    <td className="px-6 py-4 text-slate-500 dark:text-slate-400 text-sm max-w-[300px] truncate">{loc.address}</td>
+                                                    <td className="px-6 py-4 text-right">
+                                                        <div className="flex justify-end gap-2">
+                                                            <button onClick={() => handleEditLocation(loc)} className="p-2 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 text-emerald-600 transition-colors"><Icon name="Edit" size={18} /></button>
+                                                            <button onClick={() => { if (window.confirm('ยืนยันลบสถานที่นี้?')) onDeleteLocation(locId); }} className="p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 transition-colors"><Icon name="Trash2" size={18} /></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
                                     </tbody>
                                 </table>
                             </div>
@@ -482,7 +485,12 @@ export function AdminDashboard({ onLogout, projects, services, footerServices, s
                 {activeTab === 'services' && (
                     <div className="animate-fade-in-up">
                         <div className="flex justify-between items-end mb-6"><div><h3 className="text-2xl font-bold">Services Management</h3><p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Manage services displayed on homepage bento grid.</p></div><Button variant="primary" onClick={() => { setEditingService(null); setIsServiceModalOpen(true); }}><Icon name="Plus" size={18} className="mr-2" /> New Service</Button></div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">{services.map((item) => (<div key={item.id} className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 overflow-hidden shadow-sm flex flex-col h-full"><div className="aspect-video bg-slate-100 dark:bg-slate-900 overflow-hidden shrink-0">{item.image ? <img src={getImageUrl(item.image)} alt="Service" className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center opacity-10"><Icon name="Image" size={48} /></div>}</div><div className="p-6 flex-1 flex flex-col text-slate-900 dark:text-white"><h4 className="text-lg font-black leading-tight mb-2">{item.title}</h4><p className="text-slate-500 dark:text-slate-400 text-sm line-clamp-2 mb-6 leading-relaxed flex-1">{item.description}</p><div className="flex gap-2"><button onClick={() => handleEditService(item)} className="flex-1 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Edit</button><button onClick={() => { if (window.confirm('ต้องการลบบริการนี้?')) onDeleteService(item.id); }} className="p-2 rounded-xl border border-red-100 dark:border-red-900/30 text-red-500 hover:bg-red-50 transition-colors"><Icon name="Trash2" size={16} /></button></div></div></div>))}</div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">{services.map((item) => {
+                            const itemId = item.id || item._id;
+                            return (
+                                <div key={itemId} className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 overflow-hidden shadow-sm flex flex-col h-full"><div className="aspect-video bg-slate-100 dark:bg-slate-900 overflow-hidden shrink-0">{item.image ? <img src={getImageUrl(item.image)} alt="Service" className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center opacity-10"><Icon name="Image" size={48} /></div>}</div><div className="p-6 flex-1 flex flex-col text-slate-900 dark:text-white"><h4 className="text-lg font-black leading-tight mb-2">{item.title}</h4><p className="text-slate-500 dark:text-slate-400 text-sm line-clamp-2 mb-6 leading-relaxed flex-1">{item.description}</p><div className="flex gap-2"><button onClick={() => handleEditService(item)} className="flex-1 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Edit</button><button onClick={() => { if (window.confirm('ต้องการลบบริการนี้?')) onDeleteService(itemId); }} className="p-2 rounded-xl border border-red-100 dark:border-red-900/30 text-red-500 hover:bg-red-50 transition-colors"><Icon name="Trash2" size={16} /></button></div></div></div>
+                            );
+                        })}</div>
                     </div>
                 )}
 
@@ -532,17 +540,20 @@ export function AdminDashboard({ onLogout, projects, services, footerServices, s
                             <table className="w-full text-left text-slate-900 dark:text-white">
                                 <thead className="bg-slate-50 dark:bg-slate-900 text-slate-500 dark:text-slate-400 text-xs uppercase font-black"><tr><th className="px-6 py-4">Service Name</th><th className="px-6 py-4 text-right">Actions</th></tr></thead>
                                 <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
-                                    {footerServices.map((s) => (
-                                        <tr key={s.id} className="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
-                                            <td className="px-6 py-4 font-bold text-sm">{s.name}</td>
-                                            <td className="px-6 py-4 text-right">
-                                                <div className="flex justify-end gap-2">
-                                                    <button onClick={() => handleEditFooterService(s)} className="p-2 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 text-emerald-600 transition-colors"><Icon name="Edit" size={18} /></button>
-                                                    <button onClick={() => { if (window.confirm('Delete this footer service?')) onDeleteFooterService(s.id); }} className="p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 transition-colors"><Icon name="Trash2" size={18} /></button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))}
+                                    {footerServices.map((s) => {
+                                        const footerServiceId = s.id || s._id;
+                                        return (
+                                            <tr key={footerServiceId} className="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
+                                                <td className="px-6 py-4 font-bold text-sm">{s.name}</td>
+                                                <td className="px-6 py-4 text-right">
+                                                    <div className="flex justify-end gap-2">
+                                                        <button onClick={() => handleEditFooterService(s)} className="p-2 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 text-emerald-600 transition-colors"><Icon name="Edit" size={18} /></button>
+                                                        <button onClick={() => { if (window.confirm('Delete this footer service?')) onDeleteFooterService(footerServiceId); }} className="p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 transition-colors"><Icon name="Trash2" size={18} /></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
                                 </tbody>
                             </table>
                         </div>
