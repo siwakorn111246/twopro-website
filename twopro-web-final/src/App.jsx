@@ -48,13 +48,7 @@ const INITIAL_LOCATIONS = [
 ];
 
 const SAMPLE_PARTNERS = [
-    { id: 1, name: 'Google', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png', website: 'https://google.com' },
-    { id: 2, name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png', website: 'https://microsoft.com' },
-    { id: 3, name: 'Amazon', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png', website: 'https://amazon.com' },
-    { id: 4, name: 'Facebook', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png', website: 'https://facebook.com' },
-    { id: 5, name: 'Tesla', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Tesla_logo.png/2048px-Tesla_logo.png', website: 'https://tesla.com' },
-    { id: 6, name: 'Apple', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1665px-Apple_logo_black.svg.png', website: 'https://apple.com' },
-    { id: 7, name: 'Intel', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Intel-logo.svg/2560px-Intel-logo.svg.png', website: 'https://intel.com' },
+    { id: 1, name: 'Google', logo: '/uploads/logo-1771476092020-491819734.png', website: 'https://google.com' },
 ];
 
 const SAMPLE_SERVICES = [

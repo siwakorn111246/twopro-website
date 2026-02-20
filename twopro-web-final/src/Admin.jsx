@@ -377,7 +377,7 @@ export function AdminDashboard({ onLogout, projects, services, footerServices, s
         { id: 'about', label: 'About Info', icon: 'FileText' },
         { id: 'services', label: 'Services (Bento)', icon: 'Monitor' },
         { id: 'projects', label: 'Projects', icon: 'Layers' },
-        { id: 'partners', label: 'ความร่วมมือ', icon: 'Briefcase' },
+        { id: 'partners', label: 'cooperation', icon: 'Briefcase' },
         { id: 'contact-info', label: 'Contact Details', icon: 'Phone' },
         { id: 'footer-info', label: 'Footer Meta', icon: 'MinusCircle' },
         { id: 'footer-services', label: 'Footer Services', icon: 'Layout' },
@@ -501,7 +501,7 @@ export function AdminDashboard({ onLogout, projects, services, footerServices, s
 
                 {activeTab === 'partners' && (
                     <div className="animate-fade-in-up">
-                        <div className="flex justify-between items-end mb-6"><div><h3 className="text-2xl font-bold">ความร่วมมือ Management</h3><p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Manage partner logos.</p></div><Button variant="primary" onClick={() => { setEditingPartner(null); setIsPartnerModalOpen(true); }}><Icon name="Plus" size={18} className="mr-2" /> New ความร่วมมือ</Button></div>
+                        <div className="flex justify-between items-end mb-6"><div><h3 className="text-2xl font-bold">Cooperation Management</h3><p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Manage partner logos.</p></div><Button variant="primary" onClick={() => { setEditingPartner(null); setIsPartnerModalOpen(true); }}><Icon name="Plus" size={18} className="mr-2" /> New ความร่วมมือ</Button></div>
                         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">{partners.map(partner => {
                             const partnerId = partner._id || partner.id;
                             return (
