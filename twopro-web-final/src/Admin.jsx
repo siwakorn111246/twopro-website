@@ -37,7 +37,7 @@ export function ServiceModal({ service, onClose, onSave }) {
         }
     };
 
-    const handleSubmit = (e) => { e.preventDefault(); onSave({ id: service?.id, ...formData }, imageFile); };
+    const handleSubmit = (e) => { e.preventDefault(); const serviceId = service?._id || service?.id; onSave({ id: serviceId, ...formData }, imageFile); };
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm animate-fade-in-up">
@@ -62,7 +62,7 @@ export function ServiceModal({ service, onClose, onSave }) {
 
 export function FooterServiceModal({ service, onClose, onSave }) {
     const [name, setName] = useState(service?.name || '');
-    const handleSubmit = (e) => { e.preventDefault(); onSave({ id: service?.id, name }); };
+    const handleSubmit = (e) => { e.preventDefault(); const footerServiceId = service?._id || service?.id; onSave({ id: footerServiceId, name }); };
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm animate-fade-in-up">
             <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white">
@@ -262,7 +262,7 @@ export function LocationModal({ location, onClose, onSave }) {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm animate-fade-in-up">
             <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white">
                 <div className="p-6 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50"><h3 className="text-xl font-bold">{location ? 'แก้ไขสถานที่' : 'เพิ่มสถานที่ใหม่'}</h3><button onClick={onClose} className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 transition-colors"><Icon name="X" size={20} /></button></div>
-                <form onSubmit={(e) => { e.preventDefault(); onSave({ id: location?.id, ...formData }); }} className="p-8 space-y-5">
+                <form onSubmit={(e) => { e.preventDefault(); const locationId = location?._id || location?.id; onSave({ id: locationId, ...formData }); }} className="p-8 space-y-5">
                     <div className="space-y-1.5">
                         <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">ไอคอน</label>
                         <div className="flex gap-2">
