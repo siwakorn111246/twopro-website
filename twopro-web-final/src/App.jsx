@@ -43,27 +43,13 @@ const DEFAULT_ABOUT_CONFIG = {
     description2: "เราเลือกใช้อุปกรณ์ที่ผ่านมาตรฐานระดับสากลและรองรับการใช้งานระยะยาว 24/7 Expert-Led System Architecture: ทีมวิศวกรระดับมืออาชีพ เชี่ยวชาญ Data Center และ Telecommunication พร้อมดูแลงานแบบครบวงจร"
 };
 
-const INITIAL_LOCATIONS = [
-    { id: 1, title: "บริษัท ทูโปร ซัพพลาย แอนด์ เอ็นจิเนียริ่ง จำกัด", address: "ที่อยู่ 132 ถนนดอนสนาม ตำบลเวียง อำเภอเมืองพะเยา จ.พะเยา 56000", icon: "MapPin" }
-];
+const INITIAL_LOCATIONS = [];
 
-const SAMPLE_PARTNERS = [
-    { id: 1, name: 'Google', logo: '/uploads/logo-1771476092020-491819734.png', website: 'https://google.com' },
-];
+const SAMPLE_PARTNERS = [];
 
-const SAMPLE_SERVICES = [
-    { id: 1, title: 'Software Development', icon: 'Monitor', description: 'เราพัฒนา Web Application และ Mobile App ระดับ Enterprise ที่รองรับผู้ใช้งานจำนวนมาก ครบถ้วนทุกความต้องการของธุรกิจยุคดิจิทัลด้วยเทคโนโลยีทันสมัยที่สุด', tags: ['Web App', 'ERP', 'Mobile'], image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80' },
-    { id: 2, title: 'Network Infrastructure', icon: 'Server', description: 'วางระบบ Fiber Optic, LAN และ Data Center มาตรฐานสากลเพื่อความเสถียรขององค์กร', tags: ['Fiber', 'LAN'], image: 'https://images.unsplash.com/photo-1558494949-ef526b0042a0?auto=format&fit=crop&w=800&q=80' },
-    { id: 3, title: 'Electrical & Solar', icon: 'Zap', description: 'ระบบไฟฟ้าโรงงานและ Solar Rooftop ประหยัดพลังงาน ลดต้นทุนในระยะยาว', tags: ['Solar', 'Energy'], image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=800&q=80' },
-    { id: 4, title: 'CCTV & Security', icon: 'Camera', description: 'ระบบความปลอดภัย AI อัจฉริยะ ตรวจจับใบหน้าและทะเบียนรถแบบ Real-time', tags: ['AI CCTV', 'Security'], image: 'https://images.unsplash.com/photo-1557597774-9d2739f05a76?auto=format&fit=crop&w=800&q=80' }
-];
+const SAMPLE_SERVICES = [];
 
-const INITIAL_FOOTER_SERVICES = [
-    { id: 1, name: "Smart city system" },
-    { id: 2, name: "ระบบจักการโรงอาหาร" },
-    { id: 3, name: "ระบบหอกระจ่ายข่าย (4G)" },
-    { id: 4, name: "โคมไฟถนนพลังงานเเสงอาทิตย์" },
-];
+const INITIAL_FOOTER_SERVICES = [];
 
 const SAMPLE_PROJECTS = [];
 
